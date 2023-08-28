@@ -6,13 +6,23 @@ function P(nombre, capital, bandera) {
   this.bandera = bandera;
   
 }
+let adivinaCapital=document.getElementById("adivinaCapital");
+let adivinaBandera=document.getElementById("adivinaBandera");
 let nombrePais=document.getElementById("nombrePais");
-let nombreCapital=document.getElementById("nombreCapital");
 let div1=document.getElementById("div1");
+let div2=document.getElementById("div2");
+let div3=document.getElementById("div3");
+let div4=document.getElementById("div4");
+const llenarDiv=(a,b)=>{
+  a.innerHTML=`<img src="${b}" width="${200}" height="${100}"  />`;
+}
+const llenarDivC=(a,b)=>{
+  a.textContent=b;
+}
 fetch("https://restcountries.com/v3.1/all")
   .then((res) => res.json())
   .then((data) => {
-    content = "";
+    //content = "";
     
     
     data.forEach((pais) => {
@@ -23,11 +33,16 @@ fetch("https://restcountries.com/v3.1/all")
         
     });
     //console.log(paises[0]);
-    nombrePais.textContent=paises[0].nombre;
-    nombreCapital.textContent=paises[0].capital[0];
-    ruta=paises[0].bandera;
-    div1.innerHTML=`<img src="${ruta}" width="${200}" height="${100}"  />`;
-    console.log(ruta);
+    const cantidad=paises.length;
+    const posicion=Math.floor(Math.random() * cantidad) ;
+    //adivinaBandera.textContent="Adivina Bandera";
+    adivinaCapital.textContent="Adivina Capital";
+    nombrePais.textContent=paises[posicion].nombre;
+    //nombreCapital.textContent=paises[posicion].capital[0];
+    //ruta=paises[posicion].bandera;
+    //llenarDiv(div1,ruta);
+    llenarDivC(div1,paises[posicion].capital[0]);
+    //console.log(ruta);
     });
     
  

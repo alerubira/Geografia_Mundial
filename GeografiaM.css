@@ -27,7 +27,7 @@ h1,h3{
     background-color: lightblue;
     margin: 5px;
     border-radius: 10px;
-    border: 2px solid blue;
+    border: 2px solid black;
     flex: 1; /* Ocupar espacio disponible igualmente */
 }
 
@@ -38,7 +38,7 @@ h1,h3{
     background-color: lightgreen;
     margin: 5px;
     border-radius: 10px;
-    border: 2px solid green;
+    border: 2px solid black;
     flex: 1; /* Ocupar espacio disponible igualmente */
 }
 
