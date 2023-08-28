@@ -1,42 +1,35 @@
-var paises = [];
-var nombrePais=document.getElementById("nombrePais");
-var div1=document.getElementById("div1");
+
+const paises = [];
+function P(nombre, capital, bandera) {
+  this.nombre = nombre;
+  this.capital = capital;
+  this.bandera = bandera;
+  
+}
+let nombrePais=document.getElementById("nombrePais");
+let nombreCapital=document.getElementById("nombreCapital");
+let div1=document.getElementById("div1");
 fetch("https://restcountries.com/v3.1/all")
   .then((res) => res.json())
   .then((data) => {
+    content = "";
+    
     
     data.forEach((pais) => {
-      paises.push(pais);
+      p1= new P(pais.name.official,pais.capital,pais.flags.svg);
+      
+      paises.push(p1);
       
         
     });
-});
-//nombrePais.textContent=(paises[0].altSpellings[3]);
-//console.log(paises[0].altSpellings[3]);
-div1.textContent=(paises[0].flags[0]);
-const userId = 1;
-const updatedUserData = {
-  name: 'Nuevo Nombre',
-  email: 'nuevo@email.com'
-};
+    //console.log(paises[0]);
+    nombrePais.textContent=paises[0].nombre;
+    nombreCapital.textContent=paises[0].capital[0];
+    ruta=paises[0].bandera;
+    div1.innerHTML=`<img src="${ruta}" width="${200}" height="${100}"  />`;
+    console.log(ruta);
+    });
+    
+ 
 
-fetch(`https://api.example.com/users/${userId}`, {
-  method: 'PUT',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify(updatedUserData)
-})
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Error al actualizar');
-    }
-    return response.json();
-  })
-  .then(data => {
-    console.log('Actualización exitosa:', data);
-  })
-  .catch(error => {
-    console.error('Error al actualizar:', error);
-  });
 
