@@ -13,6 +13,10 @@ let div1=document.getElementById("div1");
 let div2=document.getElementById("div2");
 let div3=document.getElementById("div3");
 let div4=document.getElementById("div4");
+let inicio=document.getElementById("inicio");
+let alias=document.getElementById("alias");
+let bandera;
+let aliasObligatorio=document.getElementById("aliasObligatorio");
 const llenarDiv=(a,b)=>{
   a.innerHTML=`<img src="${b}" width="${200}" height="${100}"  />`;
 }
@@ -44,7 +48,14 @@ fetch("https://restcountries.com/v3.1/all")
     llenarDivC(div1,paises[posicion].capital[0]);
     //console.log(ruta);
     });
-    
+    boton.addEventListener("click", function() {
+           if(alias.value==""){
+            bandera=false;
+            aliasObligatorio.innerHTML="el alias debe se obligatorio";
+           }else{
+            bandera=true;
+           }
+    });
  
 
 
