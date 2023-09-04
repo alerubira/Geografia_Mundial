@@ -23,6 +23,17 @@ const llenarDiv=(a,b)=>{
 const llenarDivC=(a,b)=>{
   a.textContent=b;
 }
+const aleatorio=(al)=>{
+  return Math.floor(Math.random() * al) ;
+}
+const vaciar=()=>{
+  div1.innerHTML="";
+  div2.innerHTML="";
+  div3.innerHTML="";
+  div4.innerHTML="";
+  adivinaBandera.innerHTML="";
+  adivinaCapital.innerHTML="";
+}
 fetch("https://restcountries.com/v3.1/all")
   .then((res) => res.json())
   .then((data) => {
@@ -37,25 +48,47 @@ fetch("https://restcountries.com/v3.1/all")
         
     });
     //console.log(paises[0]);
-    const cantidad=paises.length;
-    const posicion=Math.floor(Math.random() * cantidad) ;
+    
+    //const posicion=Math.floor(Math.random() * cantidad) ;
     //adivinaBandera.textContent="Adivina Bandera";
-    adivinaCapital.textContent="Adivina Capital";
-    nombrePais.textContent=paises[posicion].nombre;
+    //adivinaCapital.textContent="Adivina Capital";
+    //nombrePais.textContent=paises[posicion].nombre;
     //nombreCapital.textContent=paises[posicion].capital[0];
     //ruta=paises[posicion].bandera;
     //llenarDiv(div1,ruta);
-    llenarDivC(div1,paises[posicion].capital[0]);
+    //llenarDivC(div1,paises[posicion].capital[0]);
     //console.log(ruta);
     });
-    boton.addEventListener("click", function() {
+    
+    const cantidad=paises.length;
+    inicio.addEventListener("click", function() {
+           aliasObligatorio.innerHTML="";
            if(alias.value==""){
-            bandera=false;
+            
             aliasObligatorio.innerHTML="el alias debe se obligatorio";
            }else{
-            bandera=true;
+            empezar();
            }
-    });
+          
+          });
  
+const empezar=()=>{
+  vaciar();
+  if(aleatorio(2)==1){
+      eligeBandera();
+  }else{
+    eligeCapital();
+  }
 
+}
+const eligeCapital=()=>{
+  adivinaCapital.textContent="Adivina Capital";
+  var posPais=aleatorio(cantidad);
+  nombrePais.textContent=paises[posPais].nombre;
+  llenarDivC(div1,paises[posPais].capital[0]);
+  
+}
+const eligeBandera=()=>{
+  adivinaBandera.textContent="Adivina Bandera";
+}
 
