@@ -17,15 +17,44 @@ let inicio=document.getElementById("inicio");
 let alias=document.getElementById("alias");
 let bandera;
 let aliasObligatorio=document.getElementById("aliasObligatorio");
+
 const llenarDiv=(a,b)=>{
   a.innerHTML=`<img src="${b}" width="${200}" height="${100}"  />`;
 }
 const llenarDivC=(a,b)=>{
   a.textContent=b;
 }
+const llenarDivs=(j,c)=>{
+    
+    if(j=="adivCapital"){
+      div1.innerHTML=paises[paisesJugar[c]].capiltal[0];
+      div2.innerHTML=paises[paisesJugar[c]].capiltal[0];
+      div3.innerHTML=paises[paisesJugar[c]].capiltal[0];
+      div4.innerHTML=paises[paisesJugar[c]].capiltal[0];
+
+    } else{
+      div1.innerHTML=`<img src="${paises[paisesJugar[c]].bandera}" width="${200}" height="${100}"  />` ;
+      div2.innerHTML= `<img src="${paises[paisesJugar[c]].bandera}" width="${200}" height="${100}"  />`;
+      div3.innerHTML= `<img src="${paises[paisesJugar[c]].bandera}" width="${200}" height="${100}"  />`;
+      div4.innerHTML= `<img src="${paises[paisesJugar[c]].bandera}" width="${200}" height="${100}"  />`;
+    }
+}
 const aleatorio=(al)=>{
   return Math.floor(Math.random() * al) ;
 }
+const llenarArray=(al,tam,arr)=>{
+    var bandera=true;
+    do{
+      var a=Math.floor(Math.random() * al)
+        if(!arr.includes(a)){
+            arr.push(a);
+        }
+        if(arr.length==tam){
+          bandera=false;
+        }
+    }while(bandera);
+}
+ 
 const vaciar=()=>{
   div1.innerHTML="";
   div2.innerHTML="";
@@ -71,24 +100,40 @@ fetch("https://restcountries.com/v3.1/all")
            }
           
           });
+ let paisesJugar=[];
  
-const empezar=()=>{
+ llenarArray(cantidad,40,paisesJugar);
+ function empezar(){
+  var cont=0;
+  do{
+     jugar(cont);
+     cont++;
+  }while(cont>10);
+
+ }
+const jugar=(c)=>{
+  
   vaciar();
   if(aleatorio(2)==1){
-      eligeBandera();
+      eligeBandera(c);
   }else{
-    eligeCapital();
+    eligeCapital(c);
   }
 
 }
-const eligeCapital=()=>{
+const eligeCapital=(c)=>{
   adivinaCapital.textContent="Adivina Capital";
-  var posPais=aleatorio(cantidad);
-  nombrePais.textContent=paises[posPais].nombre;
-  llenarDivC(div1,paises[posPais].capital[0]);
-  
+  //var posPais=aleatorio(cantidad);
+  nombrePais.textContent=paises[paisesJugar[c]].nombre;
+  //llenarDivC(div1,paises[paisesJugar[]].capital[0]);
+  //llenarDivC(div2,paises[paisesJugar[]].capital[0]);
+  //llenarDivC(div3,paises[paisesJugar[]].capital[0]);
+  //llenarDivC(div4,paises[paisesJugar[]].capital[0]);
+  llenarDivs("adivinaCapital",c)
 }
-const eligeBandera=()=>{
+const eligeBandera=(c)=>{
   adivinaBandera.textContent="Adivina Bandera";
+  nombrePais.textContent=paises[paisesJugar[c]].nombre;
+  llenarDivs("adivi",c)
 }
 
