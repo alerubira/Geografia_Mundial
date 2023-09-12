@@ -42,10 +42,10 @@ const llenarDivs=(j,c)=>{
 const aleatorio=(al)=>{
   return Math.floor(Math.random() * al) ;
 }
-const llenarArray=(al,tam,arr)=>{
+const llenarArray=(al,tam,arr)=>{//llena un arreglo de 40 para jugar
     var bandera=true;
     do{
-      var a=Math.floor(Math.random() * al)
+      var a=aleatorio(al);
         if(!arr.includes(a)){
             arr.push(a);
         }
@@ -89,7 +89,7 @@ fetch("https://restcountries.com/v3.1/all")
     //console.log(ruta);
     });
     
-    const cantidad=paises.length;
+    const cantidad=paises.length-1;
     inicio.addEventListener("click", function() {
            aliasObligatorio.innerHTML="";
            if(alias.value==""){
@@ -102,7 +102,7 @@ fetch("https://restcountries.com/v3.1/all")
           });
  let paisesJugar=[];
  
- llenarArray(cantidad,40,paisesJugar);
+ llenarArray(cantidad,40,paisesJugar);//llena un arreglo con 40 numeros para buscar los paises para jugar
  function empezar(){
   var cont=0;
   do{
